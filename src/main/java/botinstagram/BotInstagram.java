@@ -3,6 +3,7 @@ package botinstagram;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.NoSuchElementException;
 
 import enums.Navegadores;
 import pages.PerfilPage;
@@ -25,7 +26,13 @@ public class BotInstagram {
 //	}
 	
 	@Test
-	public void fazerLogin() {
-		
+	public void fazerLogin() throws InterruptedException {
+		try {
+			pagePerfil.acessarPerfil("victorhugofr_");
+		}catch(NoSuchElementException e) {
+			pagePerfil.pularNotificacoes();
+			pagePerfil.acessarPerfil("victorhugofr_");
+		}
+		pagePerfil.clicarSeguidores("victorhugofr_");
 	}
 }
